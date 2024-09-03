@@ -76,6 +76,7 @@ const renderMap = (rawText: string) => {
         src="https://maps.google.com/maps?width=520&height=400&hl=en&q=Hacienda%20Fagua%20Bogot%C3%A1+(Hacienda%20Fagua)&t=&z=14&ie=UTF8&iwloc=B&output=embed"
       ></iframe>
       <a href="https://dissertationschreibenlassen.com/">Dissertation schreiben Hilfe</a>
+      {/* eslint-disable-next-line @next/next/no-sync-scripts */}
       <script
         type="text/javascript"
         src="https://embedmaps.com/google-maps-authorization/script.js?id=5024bf8bd1afc606fc573e3c6d2bb0ab52298ebd"
