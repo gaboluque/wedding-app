@@ -1,0 +1,47 @@
+@import "colors";
+
+$headers: h1, h2, h3, h4, h5, h6;
+
+@for $i from 1 through length($headers) {
+  $header: nth($headers, $i);
+  #{$header} {
+    color: $primary-color;
+    font-size: 1.5rem + 0.5rem * $i;
+  }
+}
+
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: $primary-color;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+iframe + a {
+  color: transparent;
+}
+
+button {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+p {
+  margin-bottom: 1rem;
+}
