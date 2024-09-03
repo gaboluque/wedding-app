@@ -16,7 +16,7 @@ export const serializeJsonMarkdown = (children: any[]) =>
       // @ts-ignore
       if (node.code) {
         if (rawText.includes('<map')) {
-          text = renderMap(rawText);
+          text = renderMap();
         } else {
           text = <code key={i}>{text}</code>;
         }
@@ -66,11 +66,11 @@ export const serializeJsonMarkdown = (children: any[]) =>
     }
   });
 
-const renderMap = (rawText: string) => {
+const renderMap = () => {
   return (
     <>
       <iframe
-        width="520"
+        width="100%"
         height="400"
         id="gmap_canvas"
         src="https://maps.google.com/maps?width=520&height=400&hl=en&q=Hacienda%20Fagua%20Bogot%C3%A1+(Hacienda%20Fagua)&t=&z=14&ie=UTF8&iwloc=B&output=embed"

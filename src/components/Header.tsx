@@ -36,23 +36,25 @@ export const Header = ({ pages }: { pages: Page[] }) => {
       <Link href={link}
             key={name}
             onClick={() => setMenuOpen(false)}
-            className={`menu-item cursor-pointer block mt-4 lg:inline-block lg:mt-0 ${active ? "active" : "text-black"} mr-4`}>
+            className={`menu-item cursor-pointer block mt-4 lg:inline-block md:mt-0 ${active ? "active" : "text-black"} mr-4`}>
         {name}
       </Link>
     )
   }
 
   return (
-    <nav className="px-16 py-6 flex justify-around">
-      <div className="mr-6 px-6 flex items-center">
-        <span className="font-semibold text-2xl text-black whitespace-break-spaces">{`Ana María y Juan Carlos`}</span>
+    <nav className="px-4 py-4 md:px-10 md:py-6 flex justify-around shadow-md">
+      <div className="flex items-center">
+        <span className="font-semibold text-xl logo">
+          Ana María & Juan Carlos
+        </span>
       </div>
       {isMobile ? (
         <div className="flex flex-grow justify-end lg:hidden">
           <div className="relative inline-block text-left flex items-center">
             <div>
               <button type="button"
-                      className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-black hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-black"
+                      className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-transparent text-sm font-medium text-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-black"
                       id="menu-button" aria-expanded="true" aria-haspopup="true" onClick={() => setMenuOpen(!menuOpen)}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                      stroke="currentColor" className="w-6 h-6">
@@ -71,7 +73,7 @@ export const Header = ({ pages }: { pages: Page[] }) => {
         </div>
       )}
       {menuOpen && isMobile && (
-        <div className="absolute top-0 left-0 w-full h-full bg-white z-10">
+        <div className="open-menu absolute top-0 left-0 w-full h-full z-10">
           <div className="flex flex-col items-center justify-center h-full">
             {pages.map((item) => (
               <MenuItem active={router.asPath.includes(item.slug)} key={item.id} name={item.title}

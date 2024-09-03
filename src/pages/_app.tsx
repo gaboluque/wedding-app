@@ -14,7 +14,9 @@ export default function MyApp({
   return (
     <>
       <Header pages={pages} />
-      <Component {...pageProps} />
+      <div className="p-4 md:p-10">
+        <Component {...pageProps} />
+      </div>
     </>
   )
 }

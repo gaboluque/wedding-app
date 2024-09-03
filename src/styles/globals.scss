@@ -36,36 +36,28 @@ p {
 
 
 nav {
+  background-color: $dark-green;
+
+  .logo {
+    color: white;
+  }
+
   .menu-item {
+    color: white;
+
 
     &.active, &:hover {
-      color: $primary-color;
+      color: $light-gold;
     }
+  }
 
-    &.active {
-      font-weight: bold;
-    }
+  .open-menu {
+    background-color: $dark-green;
   }
 }
 
-.about-page {
-
-  & > div {
-    margin: 20px 0;
-    text-align: justify;
-  }
-
-  .about-image {
-    position: relative;
-    width: 130px !important;
-    right: -342px;
-    bottom: 206px;
-
-    @media (max-width: 768px) {
-      right: -124px;
-      bottom: 206px;
-    }
-  }
+.iframe {
+  max-width: 100%;
 }
 
 
