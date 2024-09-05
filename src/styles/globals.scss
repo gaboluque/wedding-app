@@ -8,6 +8,7 @@
 html, body {
   background-color: $lightest-color;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #636363;
 }
 
 
@@ -87,5 +88,13 @@ nav {
       object-fit: contain;
       margin: auto auto;
     }
+  }
+}
+
+.product-progress {
+  background-color: $secondary-color;
+
+  .progress-bar {
+    background-color: $primary-color;
   }
 }

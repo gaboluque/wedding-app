@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import escapeHTML from 'escape-html';
 import { Text } from 'slate';
+import { ProductsList } from "@/components/products/productsList";
 
 export const serializeJsonMarkdown = (children: any[]) => {
   return children.map((node, i) => {
@@ -8,6 +9,10 @@ export const serializeJsonMarkdown = (children: any[]) => {
 
     if (node.code && node.text.includes('<map')) {
       return <Fragment key={i}>{renderMap()}</Fragment>;
+    }
+
+    if (node.code && node.text.includes('<products')) {
+      return <Fragment key={i}>{renderProducts()}</Fragment>;
     }
 
     if (Text.isText(node)) {
@@ -91,3 +96,7 @@ const renderMap = () => {
     </>
   );
 };
+
+const renderProducts = () => {
+  return <ProductsList />;
+}
