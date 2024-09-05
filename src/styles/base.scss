@@ -31,7 +31,7 @@ iframe + a {
   color: transparent;
 }
 
-button {
+button, [type='button'], [type='reset'], [type='submit'] {
   background-color: $primary-color;
   color: white;
   border: none;

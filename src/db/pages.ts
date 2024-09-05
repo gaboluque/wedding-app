@@ -1,4 +1,4 @@
-import { dbClient } from "@/pages/api/db/client";
+import { dbClient } from "@/db/client";
 
 export const fetchPages = async (query = {}) => {
   return await dbClient.getMany('pages', query);

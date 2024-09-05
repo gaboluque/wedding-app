@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Error } from "@/pages/api/helpers";
 import { Page } from "@/pages/api/pages";
-import { fetchPage } from "@/pages/api/db/pages";
+import { fetchPage } from "@/db/pages";
 
 export default async function handler(
   req: NextApiRequest,

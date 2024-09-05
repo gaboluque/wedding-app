@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Error } from "@/pages/api/helpers";
-import { fetchPages } from "@/pages/api/db/pages";
-import { fetchProducts } from "@/pages/api/db/products";
+import { fetchPages } from "@/db/pages";
+import { fetchProducts } from "@/db/products";
 
 export type Product = {
   id: string,

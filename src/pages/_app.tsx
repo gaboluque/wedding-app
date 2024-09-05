@@ -13,7 +13,7 @@ export default function MyApp({
                               }: AppProps & AppOwnProps) {
   return (
     <>
-      <Header pages={pages} />
+      <Header pages={pages}/>
       <div className="p-4 md:p-10 md:max-w-screen-lg flex flex-col mx-auto">
         <Component {...pageProps} />
       </div>
@@ -25,7 +25,12 @@ MyApp.getInitialProps = async (
   context: AppContext
 ): Promise<AppOwnProps & AppInitialProps> => {
   const ctx = await App.getInitialProps(context)
-  const pages = await fetch(`${apiUrl}/pages`).then((res) => res.json());
+  try {
+    const pages = await fetch(`${apiUrl}/pages`).then((res) => res.json());
 
-  return { ...ctx, pages }
+    return { ...ctx, pages }
+  } catch (e) {
+    console.error(e)
+    return { ...ctx, pages: [] }
+  }
 }
