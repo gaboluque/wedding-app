@@ -2,8 +2,14 @@ import React, { Fragment } from 'react';
 import escapeHTML from 'escape-html';
 import { Text } from 'slate';
 
-export const serializeJsonMarkdown = (children: any[]) =>
-  children.map((node, i) => {
+export const serializeJsonMarkdown = (children: any[]) => {
+  return children.map((node, i) => {
+    if (!node) return null;
+
+    if (node.code && node.text.includes('<map')) {
+      return <Fragment key={i}>{renderMap()}</Fragment>;
+    }
+
     if (Text.isText(node)) {
       let rawText = node.text;
       let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(rawText) }} />;
@@ -15,11 +21,7 @@ export const serializeJsonMarkdown = (children: any[]) =>
 
       // @ts-ignore
       if (node.code) {
-        if (rawText.includes('<map')) {
-          text = renderMap();
-        } else {
-          text = <code key={i}>{text}</code>;
-        }
+        text = <code key={i}>{text}</code>;
       }
 
       // @ts-ignore
@@ -33,17 +35,20 @@ export const serializeJsonMarkdown = (children: any[]) =>
 
       // Handle other leaf types here...
 
-      return <Fragment key={i}>{text}</Fragment>;
-    }
-
-    if (!node) {
-      return null;
+      return <p key={i}>{text}</p>;
     }
 
     switch (node.type) {
       case 'h1':
         return <h1 key={i}>{serializeJsonMarkdown(node.children)}</h1>;
-      // Iterate through all headings here...
+      case 'h2':
+        return <h2 key={i}>{serializeJsonMarkdown(node.children)}</h2>;
+      case 'h3':
+        return <h3 key={i}>{serializeJsonMarkdown(node.children)}</h3>;
+      case 'h4':
+        return <h4 key={i}>{serializeJsonMarkdown(node.children)}</h4>;
+      case 'h5':
+        return <h5 key={i}>{serializeJsonMarkdown(node.children)}</h5>;
       case 'h6':
         return <h6 key={i}>{serializeJsonMarkdown(node.children)}</h6>;
       case 'blockquote':
@@ -62,9 +67,11 @@ export const serializeJsonMarkdown = (children: any[]) =>
         );
 
       default:
-        return <p key={i}>{serializeJsonMarkdown(node.children)}</p>;
+        return <Fragment key={i}>{serializeJsonMarkdown(node.children)}</Fragment>;
     }
   });
+}
+
 
 const renderMap = () => {
   return (

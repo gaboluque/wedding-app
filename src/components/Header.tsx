@@ -8,10 +8,12 @@ type MenuItem = {
   link: string
 }
 
+const WEDDING_DATE = new Date("2024-12-07T00:00:00Z");
+const WEDDING_PLACE = "Hacienda Fagua, Cajicá";
+
 export const Header = ({ pages }: { pages: Page[] }) => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     setIsMobile(window.innerWidth <= 768);
@@ -35,53 +37,46 @@ export const Header = ({ pages }: { pages: Page[] }) => {
     return (
       <Link href={link}
             key={name}
-            onClick={() => setMenuOpen(false)}
-            className={`menu-item cursor-pointer block mt-4 lg:inline-block md:mt-0 ${active ? "active" : "text-black"} mr-4`}>
+            className={`menu-item cursor-pointer block lg:inline-block ${active ? "active" : "text-black"}`}>
         {name}
       </Link>
     )
   }
 
+  const timeUntilWedding = useMemo(() => {
+    const time = Math.floor((WEDDING_DATE.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+    return time > 0 ? `${time} días para que amarren a Otón` : "¡Hoy es el gran día!";
+  }, []);
+
   return (
-    <nav className="px-4 py-4 md:px-10 md:py-6 flex justify-around shadow-md">
-      <div className="flex items-center">
-        <span className="font-semibold text-xl logo">
-          Ana María & Juan Carlos
-        </span>
+    <header className="py-10 text-center">
+      <h1 className="text-4xl font-semibold tracking-widest">
+        Ana María & <br className="md:hidden"/> Juan Carlos
+      </h1>
+      <div className="flex items-center justify-center mt-2 h-60 md:h-36">
+        <p className="text-lg text-gray-500 text-center h-20">
+          {WEDDING_DATE.toLocaleDateString('es', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })} &bull; {WEDDING_PLACE}<br/>
+          {timeUntilWedding}
+        </p>
       </div>
-      {isMobile ? (
-        <div className="flex flex-grow justify-end lg:hidden">
-          <div className="relative inline-block text-left flex items-center">
-            <div>
-              <button type="button"
-                      className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-transparent text-sm font-medium text-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-black"
-                      id="menu-button" aria-expanded="true" aria-haspopup="true" onClick={() => setMenuOpen(!menuOpen)}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                     stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="flex flex-grow justify-end lg:w-auto flex items-center">
+      <nav className="max-w-screen-sm mx-auto">
+        <ul className="flex flex-wrap justify-around text-sm font-semibold">
           {pages.map((item) => (
-            <MenuItem active={router.asPath.includes(item.slug)} key={item.id} name={item.title}
-                      link={`/${item.slug}`}/>
+            <li key={item.slug} className="mb-2 w-40">
+              <MenuItem
+                active={router.asPath.includes(item.slug)}
+                key={item.id}
+                name={item.title}
+                link={`/${item.slug}`}
+              />
+            </li>
           ))}
-        </div>
-      )}
-      {menuOpen && isMobile && (
-        <div className="open-menu absolute top-0 left-0 w-full h-full z-10">
-          <div className="flex flex-col items-center justify-center h-full">
-            {pages.map((item) => (
-              <MenuItem active={router.asPath.includes(item.slug)} key={item.id} name={item.title}
-                        link={`/${item.slug}`}/>
-            ))}
-          </div>
-        </div>
-      )}
-    </nav>
+        </ul>
+      </nav>
+    </header>
   )
 }

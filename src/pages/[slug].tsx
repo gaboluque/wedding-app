@@ -30,7 +30,6 @@ export default function PaintDetailPage({ page }: PageProps) {
 
   return (
     <div>
-      <h1>{page.title}</h1>
       {serializedContent}
     </div>
   );

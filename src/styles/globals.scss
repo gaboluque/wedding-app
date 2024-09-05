@@ -5,6 +5,11 @@
 @import "colors";
 @import "base";
 
+html, body {
+  background-color: $lightest-color;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 
 h3 {
   color: $primary-color;
@@ -36,23 +41,34 @@ p {
 
 
 nav {
-  background-color: $dark-green;
-
   .logo {
     color: white;
   }
 
   .menu-item {
-    color: white;
+    color: $primary-color;
+    height: 30px;
 
+    &:hover {
+      text-decoration: none;
+    }
 
     &.active, &:hover {
-      color: $light-gold;
+      color: $secondary-color;
+
+      // Add line under the active menu item
+        &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: $secondary-color;
+        }
     }
   }
 
   .open-menu {
-    background-color: $dark-green;
+    background-color: $primary-color;
   }
 }
 
