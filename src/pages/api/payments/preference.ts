@@ -50,13 +50,18 @@ export default async function handler(
     picture_url: product.imageUrl,
   }
 
+  const payer = {
+    name,
+    email,
+  }
+
+  console.log('Creating preference with item:', item);
+  console.log('Creating preference with payer:', payer);
+
   const preference = await new Preference(client).create({
     body: {
       items: [item],
-      payer: {
-        name,
-        email,
-      }
+      payer: payer,
     }
   });
 
