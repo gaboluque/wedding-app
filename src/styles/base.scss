@@ -1,15 +1,14 @@
 @import "colors";
 
-$headers: h1, h2, h3, h4, h5, h6;
+$headers: h6, h5, h4, h3, h2, h1;
 
 @for $i from 1 through length($headers) {
   $header: nth($headers, $i);
   #{$header} {
     color: $primary-color;
-    font-size: 1.5rem + 0.5rem * $i;
+    font-size: 1rem * $i;
   }
 }
-
 
 ul {
   list-style-type: none;
@@ -22,6 +21,7 @@ li {
 
 a {
   color: $primary-color;
+
   &:hover {
     text-decoration: underline;
   }
@@ -37,6 +37,7 @@ button, [type='button'], [type='reset'], [type='submit'] {
   border: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
+
   &:hover {
     background-color: darken($primary-color, 10%);
   }

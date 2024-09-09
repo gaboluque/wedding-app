@@ -30,11 +30,11 @@ export const ProductsList = () => {
           onClick={() => setSelectedProduct(product)}
         >
           <img
-            src="https://picsum.photos/200"
+            src={product.imageUrl}
             alt={product.name}
             className="w-full h-48 object-contain"
           />
-          <div className="p-4">
+          <div className="p-4 h-[150px]">
             <h3 className="text-lg font-bold mb-2">{product.name}</h3>
             <p className="text-gray-500">{formatCurrency(product.totalAmount)}</p>
           </div>
