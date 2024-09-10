@@ -1,9 +1,9 @@
 import React from 'react';
 import { formatCurrency } from '@/utils/currencyUtils';
-import { Product } from "@/pages/api/products";
+import { IProduct } from "@/models/Product";
 
 interface ProductDisplayProps {
-  product: Product;
+  product: IProduct;
 }
 
 export const ProductCheckoutPreview: React.FC<ProductDisplayProps> = ({ product }) => {

@@ -1,14 +1,14 @@
-import { Product } from "@/pages/api/products";
 import { useEffect, useState } from "react";
 import { Modal } from "@/components/Modal";
 import { useRouter } from "next/router";
 import { formatCurrency } from "@/utils/currencyUtils";
+import { IProduct } from "@/models/Product";
 
 
 export const ProductsList = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
   const router = useRouter();
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import { apiUrl } from "@/config";
-import { Page } from "@/pages/api/pages";
 import { serializeJsonMarkdown } from "@/utils/serialize";
+import { IPage } from "@/models/Page";
 
 type PathParams = {
   slug: string,
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 }
 
 type PageProps = {
-  page: Page
+  page: IPage
 }
 
 export default function PaintDetailPage({ page }: PageProps) {

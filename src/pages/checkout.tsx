@@ -3,14 +3,14 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { CheckoutForm } from "@/components/CheckoutForm";
-import { Product } from "@/pages/api/products";
 import { createPaymentPreference } from "@/services/payments/createPaymentPreference";
 import { ProductCheckoutPreview } from "@/components/products/productCheckoutPreview";
 import { NextPageContext } from "next";
 import { apiUrl } from "@/config";
+import { IProduct } from "@/models/Product";
 
 type CheckoutProps = {
-  product: Product | null;
+  product: IProduct | null;
 };
 
 const Checkout = ({ product }: CheckoutProps) => {

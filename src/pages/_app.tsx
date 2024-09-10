@@ -1,10 +1,10 @@
 import App, { AppContext, AppInitialProps, AppProps } from 'next/app'
 import { Header } from "@/components/Header";
 import '@/styles/globals.scss'
-import { Page } from "@/pages/api/pages";
 import { apiUrl } from "@/config";
+import { IPage } from "@/models/Page";
 
-type AppOwnProps = { pages: Page[] }
+type AppOwnProps = { pages: IPage[] }
 
 export default function MyApp({
                                 Component,

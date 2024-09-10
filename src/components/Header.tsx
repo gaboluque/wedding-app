@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { Page } from "@/pages/api/pages";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { IPage } from "@/models/Page";
 
 type MenuItem = {
   name: string,
@@ -13,7 +13,7 @@ type MenuItem = {
 const WEDDING_DATE = new Date("2024-12-07T17:00:00-05:00");
 const WEDDING_PLACE = "Hacienda Fagua, Cajicá";
 
-export const Header = ({ pages }: { pages: Page[] }) => {
+export const Header = ({ pages }: { pages: IPage[] }) => {
   const router = useRouter();
   const isMobile = useIsMobile();
   const [isSticky, setIsSticky] = useState(false);
