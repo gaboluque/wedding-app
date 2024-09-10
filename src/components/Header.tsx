@@ -2,33 +2,35 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Page } from "@/pages/api/pages";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 type MenuItem = {
   name: string,
   link: string
 }
 
-const WEDDING_DATE = new Date("2024-12-07T00:00:00Z");
+// GMT-5
+const WEDDING_DATE = new Date("2024-12-07T17:00:00-05:00");
 const WEDDING_PLACE = "Hacienda Fagua, Cajicá";
 
 export const Header = ({ pages }: { pages: Page[] }) => {
   const router = useRouter();
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-  }, []);
+    if (isMobile) {
+      const handleScroll = () => {
+        const offset = window.scrollY;
+        setIsSticky(offset > 100); // Adjust this value as needed
+      };
 
-  // Actively listen for window resize events
-  useEffect(() => {
-    if(typeof window !== "object") return;
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
     }
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
   }, [isMobile]);
 
   const MenuItem = ({ name, link, active }: MenuItem & { active: boolean }) => {
@@ -45,25 +47,29 @@ export const Header = ({ pages }: { pages: Page[] }) => {
 
   const timeUntilWedding = useMemo(() => {
     const time = Math.floor((WEDDING_DATE.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-    return time > 0 ? `${time} días para que amarren a Otón` : "¡Hoy es el gran día!";
+    return time > 0 ? `${time} días para el gran día!` : "¡Hoy es el gran día!";
   }, []);
 
   return (
-    <header className="py-10 text-center">
+    <header className={`py-10 text-center`}>
       <h1 className="text-4xl font-semibold tracking-widest">
         Ana María & <br className="md:hidden"/> Juan Carlos
       </h1>
       <div className="flex items-center justify-center mt-2 h-60 md:h-36">
-        <p className="text-lg text-gray-500 text-center h-20">
+        <p className="text-lg mb-2 text-gray-500 text-center h-20">
           {WEDDING_DATE.toLocaleDateString('es', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
-          })} &bull; {WEDDING_PLACE}<br/>
-          {timeUntilWedding}
+          })} &bull; {WEDDING_PLACE}
+          <br/>
+          <br/>
+          <span className="text-2xl font-semibold">
+            {timeUntilWedding}
+          </span>
         </p>
       </div>
-      <nav className="max-w-screen-sm mx-auto">
+      <nav className={`py-2 max-w-screen-sm mx-auto ${isSticky ? 'fixed top-0 left-0 right-0 bg-white shadow-md z-50' : ''}`}>
         <ul className="flex flex-wrap justify-around text-sm font-semibold">
           {pages.map((item) => (
             <li key={item.slug} className="mb-2 w-40">

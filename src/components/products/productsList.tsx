@@ -7,40 +7,54 @@ import { formatCurrency } from "@/utils/currencyUtils";
 
 export const ProductsList = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const router = useRouter();
 
   useEffect(() => {
+    setLoading(true);
     fetch('/api/products')
       .then(res => res.json())
       .then(setProducts)
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, []);
 
   const handleBuyProduct = async () => {
     await router.push('/checkout?productId=' + selectedProduct?.id);
   }
 
+  if (loading) {
+    return (
+      <div className="text-center">
+        <p>Cargando...</p>
+      </div>
+    )
+  }
+
   return (
-    <div className="products-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="px-5 products-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {products.map(product => (
         <div
           key={product.id}
-          className="product-item border rounded-sm shadow-md overflow-hidden bg-white hover:shadow-lg transition-shadow hover:cursor-pointer"
+          className="product-item border rounded-sm shadow-md overflow-hidden bg-white hover:shadow-lg hover:cursor-pointer hover:scale-[1.02] transition-all"
           onClick={() => setSelectedProduct(product)}
         >
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-full h-48 object-contain"
+            className="w-full h-48 object-cover"
           />
-          <div className="p-4 h-[150px]">
-            <h3 className="text-lg font-bold mb-2">{product.name}</h3>
+          <div className="p-4">
+            {/* Wrap content */}
+            <h3 className="text-sm h-[50px] font-bold mb-2">
+              {product.name.length > 40 ? product.name.slice(0, 40) + '...' : product.name}
+            </h3>
             <p className="text-gray-500">{formatCurrency(product.totalAmount)}</p>
           </div>
           <div className="product-progress h-4">
             <div
-              className="progress-bar h-4 text-xs text-white font-bold text-center"
+              className="px-1 progress-bar h-4 text-xs text-white font-bold text-center"
               style={{ width: `${Number(product.progress || 0)}%` }}
             >
               {product.progress || 0}%
@@ -49,7 +63,8 @@ export const ProductsList = () => {
         </div>
       ))}
       {selectedProduct && (
-        <Modal title={selectedProduct.name} open={!!selectedProduct} onClose={() => setSelectedProduct(null)} containerProps={{ style: { maxWidth: '400px' } }}>
+        <Modal title={selectedProduct.name} open={!!selectedProduct} onClose={() => setSelectedProduct(null)}
+               containerProps={{ style: { maxWidth: '400px' } }}>
           <div className="p-4">
             <img src="https://picsum.photos/200" alt={selectedProduct.name} className="w-full h-48 object-contain"/>
             <p className="my-3">

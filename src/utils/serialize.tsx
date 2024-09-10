@@ -2,6 +2,7 @@ import React, { Fragment, ReactNode } from 'react';
 import escapeHTML from 'escape-html';
 import { Text } from 'slate';
 import { ProductsList } from "@/components/products/productsList";
+import { Timeline } from "@/components/Timeline";
 
 interface Node {
   type?: string;
@@ -23,6 +24,9 @@ export const serializeJsonMarkdown = (children: Node[]): ReactNode[] => {
       }
       if (node.text.includes('<products')) {
         return <Fragment key={i}>{renderProducts()}</Fragment>;
+      }
+      if (node.text.includes('<timeline')) {
+        return <Fragment key={i}>{renderTimeline()}</Fragment>;
       }
     }
 
@@ -80,3 +84,5 @@ const renderMap = () => (
 );
 
 const renderProducts = () => <ProductsList />;
+
+const renderTimeline = () => <Timeline />;
