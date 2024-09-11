@@ -71,10 +71,14 @@ export const Header = ({ pages }: { pages: IPage[] }) => {
       </div>
       <nav className={`py-2 max-w-screen-sm mx-auto ${isSticky ? 'fixed top-0 left-0 right-0 bg-white shadow-md z-50' : ''}`}>
         <ul className="flex flex-wrap justify-around text-sm font-semibold">
-          {pages.map((item) => (
+          {[{
+            id: 'home',
+            title: 'Inicio',
+            slug: ''
+          }, ...pages].map((item) => (
             <li key={item.slug} className="mb-2 w-40">
               <MenuItem
-                active={router.asPath.includes(item.slug)}
+                active={(router.asPath.includes(item.slug) && item.slug !== "") || (item.slug === '' && router.asPath === '/')}
                 key={item.id}
                 name={item.title}
                 link={`/${item.slug}`}

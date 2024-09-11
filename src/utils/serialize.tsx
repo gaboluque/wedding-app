@@ -3,6 +3,7 @@ import escapeHTML from 'escape-html';
 import { Text } from 'slate';
 import { ProductsList } from "@/components/products/productsList";
 import { Timeline } from "@/components/Timeline";
+import { PinterestBoard } from "@/components/PinterestBoard";
 
 interface Node {
   type?: string;
@@ -27,6 +28,9 @@ export const serializeJsonMarkdown = (children: Node[]): ReactNode[] => {
       }
       if (node.text.includes('<timeline')) {
         return <Fragment key={i}>{renderTimeline()}</Fragment>;
+      }
+      if (node.text.includes('<dressCode')) {
+        return <Fragment key={i}>{renderPinterestDressCode()}</Fragment>;
       }
     }
 
@@ -86,3 +90,5 @@ const renderMap = () => (
 const renderProducts = () => <ProductsList />;
 
 const renderTimeline = () => <Timeline />;
+
+const renderPinterestDressCode = () => <PinterestBoard />;

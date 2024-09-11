@@ -10,32 +10,32 @@ const weddingEvents: Event[] = [
   {
     date: "Enero 2020",
     description: "Nos conocimos",
-    image: "lorempixum.com/200"
+    image: "https://erichu-resources.s3.amazonaws.com/oton/timeline/enero2020.jpg"
   },
   {
     date: "",
     description: "Conocimos a nuestros amigos",
-    image: "lorempixum.com/200"
+    image: "https://erichu-resources.s3.amazonaws.com/oton/timeline/friends.jpg"
   },
   {
     date: "",
     description: "Conocimos a nuestras familias",
-    image: "lorempixum.com/200"
+    image: "https://erichu-resources.s3.amazonaws.com/oton/timeline/family.jpg"
   },
   {
     date: "",
     description: "Nos enamoramos",
-    image: "lorempixum.com/200"
+    image: "https://erichu-resources.s3.amazonaws.com/oton/timeline/us.jpg"
   },
   {
     date: "Agosto 2022",
     description: "Nos fuimos a vivir juntos",
-    image: "lorempixum.com/200"
+    image: "https://erichu-resources.s3.amazonaws.com/oton/timeline/agosto2022.jpg"
   },
   {
     date: "Enero 2024",
     description: "Nos comprometimos",
-    image: "lorempixum.com/200"
+    image: "https://erichu-resources.s3.amazonaws.com/oton/timeline/engaged.jpg"
   }
 ]
 
@@ -62,7 +62,7 @@ export const Timeline = () => {
     const renderImage = () => {
       return (
         <div className="sm:block w-full h-full bg-gray-300 rounded-sm dark:bg-gray-800">
-          <img src={`https://${image}`} className="w-full h-full object-cover rounded-full"/>
+          <img src={image} className="w-full h-full object-cover "/>
         </div>
       )
     }
@@ -90,7 +90,7 @@ export const Timeline = () => {
           {renderTop()}
         </div>
         <div className="my-5 item-line flex items-center">
-          <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
+          <div className="hidden sm:flex w-full bg-gray-200 h-[1px] dark:bg-gray-700"></div>
         </div>
         <div className={`bottom ${ITEM_CLASS}`}>
           {renderBottom()}
@@ -102,7 +102,7 @@ export const Timeline = () => {
 
   return (
     <section className="timeline">
-      <ol className="items-center sm:flex">
+      <ol className="items-center sm:flex justify-center">
         {weddingEvents.map((event, i) => (
           <TimelineEvent key={i} position={i % 2 == 0} {...event} />
         ))}
