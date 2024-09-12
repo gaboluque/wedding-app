@@ -66,7 +66,7 @@ export const ProductsList = () => {
         <Modal title={selectedProduct.name} open={!!selectedProduct} onClose={() => setSelectedProduct(null)}
                containerProps={{ style: { maxWidth: '400px' } }}>
           <div className="p-4">
-            <img src="https://picsum.photos/200" alt={selectedProduct.name} className="w-full h-48 object-contain"/>
+            <img src={selectedProduct.imageUrl} alt={selectedProduct.name} className="w-full h-48 object-contain"/>
             <p className="my-3">
               {formatCurrency(selectedProduct.totalAmount)}
             </p>
