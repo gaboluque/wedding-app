@@ -2,8 +2,10 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Error } from "@/pages/api/helpers";
 import { Items } from "mercadopago/dist/clients/commonTypes";
 import { Payer } from "mercadopago/dist/clients/payment/commonTypes";
-import MercadoPagoPreference from "@/models/MercadoPagoPreference";
+import MercadoPagoClient from "@/models/MercadoPagoClient";
 import Product from "@/models/Product";
+import Payment, { IPayment } from "@/models/Payment";
+import { OptionalId } from "mongodb";
 
 export default async function handler(
   req: NextApiRequest,
@@ -39,7 +41,22 @@ export default async function handler(
     email,
   }
 
-  const preference = await MercadoPagoPreference.createPreference(item, payer);
+  const preference = await MercadoPagoClient.createPreference(item, payer);
+
+  if(!preference || !preference.id) return res.status(500).json({ message: 'Failed to create preference' });
+
+  const paymentDTO = {
+    product: product.id,
+    amount: contributionAmount,
+    name,
+    email,
+    comment: message,
+    preferenceId: preference.id
+  } as OptionalId<IPayment>;
+
+  const payment = await Payment.createPayment(paymentDTO);
+
+  if(!payment) return res.status(500).json({ message: 'Failed to create payment' });
 
   res.status(200).json(preference);
 }

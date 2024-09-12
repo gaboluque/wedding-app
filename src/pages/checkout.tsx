@@ -59,6 +59,7 @@ const Checkout = ({ product }: CheckoutProps) => {
     } catch (error) {
       console.error("Error creating payment preference:", error);
       setError("Error al procesar el pago. Por favor, inténtalo de nuevo.");
+      setLoading(false);
     }
   }, [loading, product]);
 

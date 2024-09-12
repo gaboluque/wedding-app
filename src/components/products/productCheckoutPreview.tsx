@@ -11,7 +11,7 @@ export const ProductCheckoutPreview: React.FC<ProductDisplayProps> = ({ product 
     <div className="product-item bg-white rounded-sm w-full">
       <div className="flex flex-col items-start gap-4">
         <div className="w-full text-center">
-          <img src="https://picsum.photos/200" alt={product.name} className="w-full h-48 object-contain"/>
+          <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-contain"/>
         </div>
         <div className="w-full h-full px-4">
           <p className="my-3 text-lg font-semibold">{product.name}</p>
