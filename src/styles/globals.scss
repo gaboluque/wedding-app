@@ -12,8 +12,8 @@ html, body {
 }
 
 p {
-  text-align: justify;
   white-space: break-spaces;
+  text-align: center;
 }
 
 
@@ -122,5 +122,13 @@ nav {
         }
       }
     }
+  }
+}
+
+
+.product-item {
+
+  &:hover {
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%);
   }
 }

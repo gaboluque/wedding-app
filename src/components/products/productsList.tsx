@@ -37,7 +37,7 @@ export const ProductsList = () => {
       {products.map(product => (
         <div
           key={product.id}
-          className="product-item border rounded-sm shadow-md overflow-hidden bg-white hover:shadow-lg hover:cursor-pointer hover:scale-[1.02] transition-all"
+          className="product-item bg-[#F6F1EA] rounded-lg overflow-hidden hover:cursor-pointer transition-all"
           onClick={() => setSelectedProduct(product)}
         >
           <img
@@ -46,7 +46,6 @@ export const ProductsList = () => {
             className="w-full h-48 object-cover"
           />
           <div className="p-4">
-            {/* Wrap content */}
             <h3 className="text-sm h-[50px] font-bold mb-2">
               {product.name.length > 40 ? product.name.slice(0, 40) + '...' : product.name}
             </h3>

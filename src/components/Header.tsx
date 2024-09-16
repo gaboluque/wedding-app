@@ -10,6 +10,7 @@ type MenuItem = {
 }
 
 // GMT-5
+// TODO: Add calendar image
 const WEDDING_DATE = new Date("2024-12-07T17:00:00-05:00");
 const WEDDING_PLACE = "Hacienda Fagua, Cajicá";
 
@@ -47,7 +48,7 @@ export const Header = ({ pages }: { pages: IPage[] }) => {
 
   const timeUntilWedding = useMemo(() => {
     const time = Math.floor((WEDDING_DATE.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-    return time > 0 ? `${time} días para el gran día!` : "¡Hoy es el gran día!";
+    return time > 0 ? `Faltan ${time} días para el gran día!` : "¡Hoy es el gran día!";
   }, []);
 
   return (

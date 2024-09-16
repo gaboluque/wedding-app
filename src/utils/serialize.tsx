@@ -51,7 +51,7 @@ const renderTextNode = (node: Node, key: number): ReactNode => {
   if (node.code) text = <code key={key}>{text}</code>;
   if (node.italic) text = <em key={key}>{text}</em>;
 
-  return <Fragment key={key}>{text}</Fragment>;
+  return <p key={key}>{text}</p>;
 }
 
 const renderBlockNode = (node: Node, key: number): ReactNode => {
