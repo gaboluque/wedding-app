@@ -5,9 +5,11 @@
 @import "colors";
 @import "base";
 
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&display=swap');
+
 html, body {
   background-color: $lightest-color;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Baskervville, 'Times New Roman', Times, serif;
   color: #636363;
 }
 
@@ -18,6 +20,12 @@ p {
 
 
 nav {
+  border-bottom: 0.5px solid $light-color;
+
+  @media screen and (max-width: 768px) {
+    border-bottom: none;
+  }
+
   .logo {
     color: white;
   }
@@ -25,6 +33,7 @@ nav {
   .menu-item {
     color: $primary-color;
     height: 30px;
+    font-size: 16px;
 
     &:hover {
       text-decoration: none;

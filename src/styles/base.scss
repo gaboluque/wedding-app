@@ -6,7 +6,7 @@ $headers: h6, h5, h4, h3, h2, h1;
   $header: nth($headers, $i);
   #{$header} {
     color: $primary-color;
-    font-size: 1rem * $i;
+    font-size: 0.7rem * $i;
     text-align: center;
   }
 }
@@ -41,6 +41,11 @@ button, [type='button'], [type='reset'], [type='submit'] {
 
   &:hover {
     background-color: darken($primary-color, 10%);
+  }
+
+  &.link {
+    background-color: transparent;
+    color: $primary-color;
   }
 }
 

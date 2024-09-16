@@ -14,7 +14,7 @@ export default function MyApp({
   return (
     <>
       <Header pages={pages}/>
-      <div className="px-4 md:px-10 md:max-w-screen-lg flex flex-col mx-auto">
+      <div id="content" className="p-4 pt-[72px] md:pt-0 pb-[100px] md:px-10 md:max-w-screen-lg flex flex-col mx-auto items-center">
         <Component {...pageProps} />
       </div>
     </>

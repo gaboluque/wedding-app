@@ -4,6 +4,7 @@ import { Text } from 'slate';
 import { ProductsList } from "@/components/products/productsList";
 import { Timeline } from "@/components/Timeline";
 import { PinterestBoard } from "@/components/PinterestBoard";
+import Link from "next/link";
 
 interface Node {
   type?: string;
@@ -43,9 +44,9 @@ export const serializeJsonMarkdown = (children: Node[]): ReactNode[] => {
 }
 
 const renderTextNode = (node: Node, key: number): ReactNode => {
-  if (node.text === '' || node.text === "\n") return <br key={key} />;
+  if (node.text === '' || node.text === "\n") return <br key={key}/>;
 
-  let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text || '') }} />;
+  let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text || '') }}/>;
 
   if (node.bold) text = <strong key={key}>{text}</strong>;
   if (node.code) text = <code key={key}>{text}</code>;
@@ -58,37 +59,65 @@ const renderBlockNode = (node: Node, key: number): ReactNode => {
   const childNodes = node.children ? serializeJsonMarkdown(node.children) : null;
 
   switch (node.type) {
-    case 'h1': return <h1 key={key}>{childNodes}</h1>;
-    case 'h2': return <h2 key={key}>{childNodes}</h2>;
-    case 'h3': return <h3 key={key}>{childNodes}</h3>;
-    case 'h4': return <h4 key={key}>{childNodes}</h4>;
-    case 'h5': return <h5 key={key}>{childNodes}</h5>;
-    case 'h6': return <h6 key={key}>{childNodes}</h6>;
-    case 'blockquote': return <blockquote key={key}>{childNodes}</blockquote>;
-    case 'ul': return <ul key={key}>{childNodes}</ul>;
-    case 'ol': return <ol key={key}>{childNodes}</ol>;
-    case 'li': return <li key={key}>{childNodes}</li>;
-    case 'link': return (
-      <a href={escapeHTML(node.url || '')} key={key}>
-        {childNodes}
-      </a>
-    );
-    default: return <Fragment key={key}>{childNodes}</Fragment>;
+    case 'h1':
+      return <h1 key={key}>{childNodes}</h1>;
+    case 'h2':
+      return <h2 key={key}>{childNodes}</h2>;
+    case 'h3':
+      return <h3 key={key}>{childNodes}</h3>;
+    case 'h4':
+      return <h4 key={key}>{childNodes}</h4>;
+    case 'h5':
+      return <h5 key={key}>{childNodes}</h5>;
+    case 'h6':
+      return <h6 key={key}>{childNodes}</h6>;
+    case 'blockquote':
+      return <blockquote key={key}>{childNodes}</blockquote>;
+    case 'ul':
+      return <ul key={key}>{childNodes}</ul>;
+    case 'ol':
+      return <ol key={key}>{childNodes}</ol>;
+    case 'li':
+      return <li key={key}>{childNodes}</li>;
+    case 'link':
+      return (
+        <a href={escapeHTML(node.url || '')} key={key}>
+          {childNodes}
+        </a>
+      );
+    default:
+      return <Fragment key={key}>{childNodes}</Fragment>;
   }
 }
 
+function myNavFunc(){
+  // If it's an iPhone..
+  if( (navigator.platform.indexOf("iPhone") != -1)
+    || (navigator.platform.indexOf("iPod") != -1)
+    || (navigator.platform.indexOf("iPad") != -1))
+    window.open("maps://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=4.9214839,-74.0666753");
+  else
+    window.open("https://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=4.9214839,-74.0666753");
+}
+
 const renderMap = () => (
-  <iframe
-    width="100%"
-    height="400"
-    id="gmap_canvas"
-    src="https://maps.google.com/maps?width=520&height=400&hl=en&q=Hacienda%20Fagua%20Bogot%C3%A1+(Hacienda%20Fagua)&t=&z=14&ie=UTF8&iwloc=B&output=embed"
-    title="Google Map of Hacienda Fagua"
-  />
+  // <iframe
+  //   width="100%"
+  //   height="400"
+  //   id="gmap_canvas"
+  //   src="https://maps.google.com/maps?width=520&height=400&hl=en&q=Hacienda%20Fagua%20Bogot%C3%A1+(Hacienda%20Fagua)&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+  //   title="Google Map of Hacienda Fagua"
+  // />
+
+  <div className="text-center">
+    <img src="https://images.zola.com/2c794425-cce4-4784-94c0-f73ef69b2822?w=1000" onClick={myNavFunc} width={400}
+         alt="Google Map of Hacienda Fagua"/>
+    <button className="link" onClick={myNavFunc}>Abrir en Maps</button>
+  </div>
 );
 
-const renderProducts = () => <ProductsList />;
+const renderProducts = () => <ProductsList/>;
 
-const renderTimeline = () => <Timeline />;
+const renderTimeline = () => <Timeline/>;
 
-const renderPinterestDressCode = () => <PinterestBoard />;
+const renderPinterestDressCode = () => <PinterestBoard/>;

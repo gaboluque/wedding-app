@@ -28,9 +28,5 @@ type PageProps = {
 export default function PaintDetailPage({ page }: PageProps) {
   const serializedContent = serializeJsonMarkdown(page.content);
 
-  return (
-    <div>
-      {serializedContent}
-    </div>
-  );
+  return serializedContent;
 }
