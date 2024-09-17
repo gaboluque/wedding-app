@@ -50,13 +50,15 @@ export const ProductsList = () => {
               {product.name.length > 40 ? product.name.slice(0, 40) + '...' : product.name}
             </h3>
             <p className="text-gray-500">{formatCurrency(product.totalAmount)}</p>
-          </div>
-          <div className="product-progress h-4">
-            <div
-              className="px-1 progress-bar h-4 text-xs text-white font-bold text-center"
-              style={{ width: `${Number(product.progress || 0)}%` }}
-            >
-              {product.progress || 0}%
+            <div className="progress-container flex flex-row gap-2">
+              <div className="product-progress rounded-2xl h-3 w-5/6">
+                <div
+                  className="px-1 rounded-2xl progress-bar h-3 text-xs text-white font-bold text-center"
+                  style={{ width: `${Number(product.progress || 0)}%` }}
+                >
+                </div>
+              </div>
+              <span className="h-3 w-1/6 text-md leading-[10px]">{product.progress || 0}%</span>
             </div>
           </div>
         </div>
