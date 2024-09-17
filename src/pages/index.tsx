@@ -9,7 +9,7 @@ export default function Home() {
 
       <section className="names mb-20">
         <h3 className="text-3xl md:text-6xl">
-          Ana Maria Hernandez Dávila
+          Ana Maria Hernández Dávila
         </h3>
         <br/>
         <p className="m-0">&amp;</p>
