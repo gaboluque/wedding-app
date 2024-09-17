@@ -52,3 +52,48 @@ button, [type='button'], [type='reset'], [type='submit'] {
 p {
   margin-bottom: 0.5rem;
 }
+
+
+.app-img-container {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  .bg-image {
+    position: absolute;
+    z-index: 1;
+    height: 100px;
+  }
+
+  .bg-image-1 {
+    top: 20px;
+    left: 20px;
+  }
+
+  .bg-image-2 {
+    top: 20px;
+    right: 20px;
+  }
+
+  .bg-image-3 {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .bg-image-4 {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .bg-image-5 {
+    bottom: 50%;
+    right: 20px;
+  }
+}
+
+.main-content {
+  position: relative;
+  z-index: 10;
+  /* Add padding if needed to prevent content from touching the edges */
+  padding: 20px;
+}

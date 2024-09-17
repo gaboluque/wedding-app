@@ -14,8 +14,16 @@ export default function MyApp({
   return (
     <>
       <Header pages={pages}/>
-      <div id="content" className="p-4 pt-[72px] md:pt-0 pb-[100px] md:px-10 md:max-w-screen-lg flex flex-col mx-auto items-center">
-        <Component {...pageProps} />
+      <div id="content"
+           className="app-img-container p-4 pt-[72px] md:pt-0 pb-[100px] md:px-10 md:max-w-screen-lg flex flex-col mx-auto items-center">
+        <img src="/images/flor1.png" alt="Flor 1" className="bg-image bg-image-1"/>
+        <img src="/images/flor2.png" alt="Flor 2" className="bg-image bg-image-2"/>
+        <img src="/images/flor3.png" alt="Flor 3" className="bg-image bg-image-3"/>
+        <img src="/images/flor4.png" alt="Flor 4" className="bg-image bg-image-4"/>
+        <img src="/images/flor5.png" alt="Flor 5" className="bg-image bg-image-5"/>
+        <div className="main-content">
+          <Component {...pageProps} />
+        </div>
       </div>
     </>
   )
