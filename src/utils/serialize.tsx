@@ -109,7 +109,7 @@ const renderMap = () => (
   //   title="Google Map of Hacienda Fagua"
   // />
 
-  <div className="text-center">
+  <div className="text-center flex flex-col items-center">
     <img src="/images/hacienda.png" onClick={myNavFunc} width={400}
          alt="Google Map of Hacienda Fagua"/>
     <button className="link" onClick={myNavFunc}>Abrir en Maps</button>
