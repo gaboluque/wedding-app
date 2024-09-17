@@ -33,7 +33,7 @@ export const ProductsList = () => {
   }
 
   return (
-    <div className="px-5 products-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="px-5 products-list grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       {products.map(product => (
         <div
           key={product.id}
@@ -43,7 +43,7 @@ export const ProductsList = () => {
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-full h-48 object-cover"
+            className="w-full h-48 object-cover bg-white"
           />
           <div className="p-4">
             <h3 className="text-sm h-[50px] font-bold mb-2">

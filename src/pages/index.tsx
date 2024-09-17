@@ -3,7 +3,9 @@ import { formatDate } from "@/utils/dateUtils";
 
 export default function Home() {
   return (
-    <main className={`home`}>
+    <main className={`home text-center flex flex-col items-center`}>
+
+      <img src="/images/hacienda.png" alt="Ana María y Juan Carlos" className="mb-20 max-w-full md:w-[500px] object-contain object-center" />
 
       <section className="names mb-20">
         <h3 className="text-3xl md:text-6xl">

@@ -31,7 +31,7 @@ export const serializeJsonMarkdown = (children: Node[]): ReactNode[] => {
         return <Fragment key={i}>{renderTimeline()}</Fragment>;
       }
       if (node.text.includes('<dressCode')) {
-        return <Fragment key={i}>{renderPinterestDressCode()}</Fragment>;
+        return <Fragment key={i}>{renderDressCode()}</Fragment>;
       }
     }
 
@@ -110,7 +110,7 @@ const renderMap = () => (
   // />
 
   <div className="text-center">
-    <img src="https://images.zola.com/2c794425-cce4-4784-94c0-f73ef69b2822?w=1000" onClick={myNavFunc} width={400}
+    <img src="/images/hacienda.png" onClick={myNavFunc} width={400}
          alt="Google Map of Hacienda Fagua"/>
     <button className="link" onClick={myNavFunc}>Abrir en Maps</button>
   </div>
@@ -120,4 +120,8 @@ const renderProducts = () => <ProductsList/>;
 
 const renderTimeline = () => <Timeline/>;
 
-const renderPinterestDressCode = () => <PinterestBoard/>;
+const renderDressCode = () => (
+  <div>
+    <img src="/images/dressCode.png" alt="Dress code" className="object-contain" width={500}/>
+  </div>
+)
