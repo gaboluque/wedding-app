@@ -28,11 +28,6 @@ const weddingEvents: Event[] = [
     image: "https://erichu-resources.s3.amazonaws.com/oton/timeline/us.jpg"
   },
   {
-    date: "Agosto 2022",
-    description: "Nos fuimos a vivir juntos",
-    image: "https://erichu-resources.s3.amazonaws.com/oton/timeline/agosto2022.jpg"
-  },
-  {
     date: "Enero 2024",
     description: "Nos comprometimos",
     image: "https://erichu-resources.s3.amazonaws.com/oton/timeline/engaged.jpg"
