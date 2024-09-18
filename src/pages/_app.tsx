@@ -20,7 +20,7 @@ export default function MyApp({
         <img src="/images/flor2.png" alt="Flor 2" className="bg-image bg-image-2"/>
         <img src="/images/flor3.png" alt="Flor 3" className="bg-image bg-image-3"/>
         <img src="/images/flor4.png" alt="Flor 4" className="bg-image bg-image-4"/>
-        <img src="/images/flor5.png" alt="Flor 5" className="bg-image bg-image-5"/>
+        {/*<img src="/images/flor5.png" alt="Flor 5" className="bg-image bg-image-5"/>*/}
         <div className="main-content">
           <Component {...pageProps} />
         </div>

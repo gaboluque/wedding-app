@@ -41,7 +41,7 @@ export const Header = ({ pages }: { pages: IPage[] }) => {
 
   const timeUntilWedding = useMemo(() => {
     const days = Math.floor((WEDDING_DATE.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-    return days > 0 ? `Faltan ${days} días para el gran día!` : "¡Hoy es el gran día!";
+    return days > 0 ? `¡Faltan ${days} días para el gran día!` : "¡Hoy es el gran día!";
   }, []);
 
   useEffect(() => {

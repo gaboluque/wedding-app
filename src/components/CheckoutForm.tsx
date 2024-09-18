@@ -138,7 +138,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
           rows={4}
           value={formData.message}
           onChange={handleChange}
-          placeholder="Dejale un mensaje a los novios!"
+          placeholder="¡Dejale un mensaje a los novios!"
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         ></textarea>
         {errors.message && <p className="mt-2 text-sm text-red-600">{errors.message}</p>}

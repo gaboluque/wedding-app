@@ -43,9 +43,9 @@ export const Timeline = () => {
       <li
         className="timeline-item text-center flex flex-col md:flex-row relative mb-6 justify-center gap-2 w-[300px] md:w-[500px] h-[400px]">
         <div className="flex flex-col justify-center relative">
-          <p className="text-center description font-normal md:w-[150px] md:mr-2 bg-[#f8f8f6] z-10 py-3">
+          <p className="text-lg text-center description font-normal md:w-[150px] md:mr-2 bg-[#f8f8f6] z-10 py-3">
             {description}
-            <time className="text-center date block text-sm font-normal leading-none">
+            <time className="text-center date block font-normal leading-none">
               {date}
             </time>
           </p>
