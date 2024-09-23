@@ -100,6 +100,10 @@ function myNavFunc(){
     window.open("https://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=4.9214839,-74.0666753");
 }
 
+function openInWaze(){
+  window.open("https://www.waze.com/ul?ll=4.9119685,-74.0725079&navigate=yes");
+}
+
 const renderMap = () => (
   // <iframe
   //   width="100%"
@@ -113,6 +117,7 @@ const renderMap = () => (
     <img src="/images/hacienda.png" onClick={myNavFunc} width={400}
          alt="Google Map of Hacienda Fagua"/>
     <button className="link" onClick={myNavFunc}>Abrir en Maps</button>
+    <button className="link" onClick={openInWaze}>Abrir en Waze</button>
   </div>
 );
 
@@ -121,7 +126,7 @@ const renderProducts = () => <ProductsList/>;
 const renderTimeline = () => <Timeline/>;
 
 const renderDressCode = () => (
-  <div>
+  <div className="flex flex-col items-center">
     <img src="/images/dressCode.png" alt="Dress code" className="object-contain" width={500}/>
   </div>
 )

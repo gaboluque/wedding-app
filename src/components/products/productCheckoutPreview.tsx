@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatCurrency } from '@/utils/currencyUtils';
 import { IProduct } from "@/models/Product";
+import { productProgress } from "@/utils/productUtils";
 
 interface ProductDisplayProps {
   product: IProduct;
@@ -21,9 +22,9 @@ export const ProductCheckoutPreview: React.FC<ProductDisplayProps> = ({ product 
         <div className="product-progress h-4 w-full bg-gray-200 rounded-sm">
           <div
             className="px-1 progress-bar h-4 text-xs text-white font-bold text-center bg-green-500"
-            style={{ width: `${Number(product.progress || 0)}%` }}
+            style={{ width: `${productProgress(product)}%` }}
           >
-            {product.progress || 0}%
+            {productProgress(product)}%
           </div>
         </div>
       </div>

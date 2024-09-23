@@ -25,6 +25,10 @@ export default function MyApp({
           <Component {...pageProps} />
         </div>
       </div>
+      {/*  Copyright */}
+      <footer className="text-center text-gray-500 text-sm mt-10 p-10">
+        Por <a href="https://www.linkedin.com/in/gluquem" className="underline" target="_blank" rel="noopener noreferrer">Gabriel</a> y María Paula con ❤
+      </footer>
     </>
   )
 }

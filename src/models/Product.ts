@@ -50,7 +50,7 @@ class Product implements IProduct {
 
   static async fetchProducts(query = {}): Promise<Product[]> {
     const db = mongoClient.db(dbName);
-    const products = await db.collection<IProduct>("products").find(query).toArray();
+    const products = await db.collection<IProduct>("products").find(query).sort({ createdAt: -1 }).toArray();
     return products.map(Product.constructFromDoc);
   }
 
@@ -58,6 +58,14 @@ class Product implements IProduct {
     const db = mongoClient.db(dbName);
     const product = await db.collection<IProduct>("products").findOne({ _id: new ObjectId(id) });
     return product ? Product.constructFromDoc(product) : null;
+  }
+
+  static async updateProgress(productId: string, newPayment: number): Promise<void> {
+    const db = mongoClient.db(dbName);
+    await db.collection<IProduct>("products").updateOne(
+      { _id: new ObjectId(productId) },
+      { $inc: { progress: newPayment } }
+    );
   }
 }
 

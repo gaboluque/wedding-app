@@ -3,6 +3,7 @@ import { Modal } from "@/components/Modal";
 import { useRouter } from "next/router";
 import { formatCurrency } from "@/utils/currencyUtils";
 import { IProduct } from "@/models/Product";
+import { productProgress } from "@/utils/productUtils";
 
 
 export const ProductsList = () => {
@@ -24,6 +25,8 @@ export const ProductsList = () => {
     await router.push('/checkout?productId=' + selectedProduct?.id);
   }
 
+  console.log(products);
+
   if (loading) {
     return (
       <div className="text-center">
@@ -38,12 +41,12 @@ export const ProductsList = () => {
         <div
           key={product.id}
           className="product-item bg-[#F6F1EA] rounded-lg overflow-hidden hover:cursor-pointer transition-all"
-          onClick={() => setSelectedProduct(product)}
+          onClick={() => productProgress(product) === "100" ? null : setSelectedProduct(product)}
         >
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-full h-48 object-cover bg-white"
+            className="w-full h-48 object-fit bg-white"
           />
           <div className="p-4">
             <h3 className="text-sm h-[50px] font-bold mb-2">
@@ -54,11 +57,16 @@ export const ProductsList = () => {
               <div className="product-progress rounded-2xl h-3 w-5/6">
                 <div
                   className="px-1 rounded-2xl progress-bar h-3 text-xs text-white font-bold text-center"
-                  style={{ width: `${Number(product.progress || 0)}%` }}
+                  style={{ width: `${productProgress(product)}%` }}
                 >
                 </div>
               </div>
-              <span className="h-3 w-1/6 text-md leading-[10px]">{product.progress || 0}%</span>
+              <span className="h-3 w-1/6 text-md leading-[10px]">{productProgress(product) || 0}%</span>
+            </div>
+            <div className="flex justify-center">
+              <button className={`rounded-sm mt-4 ${productProgress(product) === "100" ? 'bg-gray-400' : ''}`}>
+                {productProgress(product) === "100" ? 'Completado' : 'Aportar'}
+              </button>
             </div>
           </div>
         </div>

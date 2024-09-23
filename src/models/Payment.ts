@@ -1,6 +1,7 @@
 import { WithId, Document, OptionalId, ObjectId } from "mongodb";
 import mongoClient from "@/db/mongoClient";
 import { dbName } from "@/config";
+import Product from "@/models/Product";
 
 
 export interface IPayment {
@@ -53,13 +54,15 @@ class Payment implements IPayment {
   }
 
   static async createPayment(payment: OptionalId<IPayment>): Promise<Payment | null> {
-    // Create payment in database
     const db = mongoClient.db(dbName);
 
     const res = await db.collection<IPayment>("payments").insertOne(payment);
     if (!res.acknowledged) return null;
 
     const createdPayment = await db.collection<IPayment>("payments").findOne({ _id: res.insertedId });
+
+    await Product.updateProgress(payment.product, payment.amount);
+
     return Payment.constructFromDoc(createdPayment);
   }
 
@@ -80,7 +83,7 @@ class Payment implements IPayment {
         { returnDocument: "after" }
       );
 
-      if(res) return Payment.constructFromDoc(res);
+      if (res) return Payment.constructFromDoc(res);
       return null;
     } catch (error) {
       console.error(error);

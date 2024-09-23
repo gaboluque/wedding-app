@@ -38,7 +38,7 @@ const Checkout = ({ product }: CheckoutProps) => {
 
   const remainingAmount = useMemo(() => {
     if (!product) return 0;
-    return product.totalAmount - ((product.progress || 0) / 100) * product.totalAmount;
+    return product.totalAmount - (product.progress || 0);
   }, [product]);
 
   const handleSubmit = useCallback(async (formData: Record<string, any>) => {
