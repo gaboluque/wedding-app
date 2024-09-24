@@ -53,7 +53,7 @@ export const Timeline = () => {
             <div className="absolute top-0 left-1/2 w-[0.5px] h-full bg-gray-300 transform -translate-x-1/2 z-0"></div>}
         </div>
         <div className="sm:block flex-1 bg-gray-300 rounded-sm dark:bg-gray-800">
-          <img src={image} className="w-full h-full object-cover "/>
+          <img src={image} className="w-full h-full object-fit"/>
         </div>
       </li>
     )
