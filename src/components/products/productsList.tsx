@@ -25,8 +25,6 @@ export const ProductsList = () => {
     await router.push('/checkout?productId=' + selectedProduct?.id);
   }
 
-  console.log(products);
-
   if (loading) {
     return (
       <div className="text-center">
