@@ -68,13 +68,14 @@ export const Header = ({ pages }: { pages: IPage[] }) => {
       <h1 className="text-4xl font-semibold tracking-widest mb-3 md:mb-14">
         <img src="/images/logo.png" alt="Ana María & Juan Carlos" className="w-40 mx-auto"/>
       </h1>
-      <div className="flex items-center justify-center my-2 mb-10 h-44 md:h-36 mx-5">
-        <p className="text-lg mb-2 text-gray-500 text-center h-20">
-          {formatDate(WEDDING_DATE)} <br/> {WEDDING_PLACE}
-          <br/><br/>
-          <span className="text-2xl font-semibold">{timeUntilWedding}</span>
-        </p>
-      </div>
+      {!router.pathname.includes("admin") ? (
+        <div className="flex items-center justify-center my-2 mb-10 h-44 md:h-36 mx-5">
+          <p className="text-lg mb-2 text-gray-500 text-center h-20">
+            {formatDate(WEDDING_DATE)} <br/> {WEDDING_PLACE}
+            <br/><br/>
+            <span className="text-2xl font-semibold">{timeUntilWedding}</span>
+          </p>
+        </div>) : null}
       <nav
         className={`p-2 px-5 md:p-2 max-w-screen-sm mx-auto ${isSticky ? 'p-4 pb-0 fixed top-0 left-0 right-0 bg-white shadow-md z-50' : ''}`}>
         <ul className="flex flex-wrap justify-around text-sm font-semibold">

@@ -53,6 +53,13 @@ class Payment implements IPayment {
     });
   }
 
+  static async fetchPayments(): Promise<Payment[]> {
+    const db = mongoClient.db(dbName);
+
+    const payments = await db.collection<IPayment>("payments").find().toArray();
+    return payments.map(Payment.constructFromDoc);
+  }
+
   static async createPayment(payment: OptionalId<IPayment>): Promise<Payment | null> {
     const db = mongoClient.db(dbName);
 
