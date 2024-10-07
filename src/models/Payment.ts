@@ -16,6 +16,10 @@ export interface IPayment {
   preferenceId: string;
 }
 
+export interface IPaymentWithProduct extends Omit<IPayment, "product"> {
+  product: Product;
+}
+
 class Payment implements IPayment {
   id: string;
   product: string;
@@ -56,8 +60,56 @@ class Payment implements IPayment {
   static async fetchPayments(): Promise<Payment[]> {
     const db = mongoClient.db(dbName);
 
-    const payments = await db.collection<IPayment>("payments").find().toArray();
-    return payments.map(Payment.constructFromDoc);
+    const aggregationCursor = db.collection<IPayment>("payments").aggregate([
+      {
+        '$lookup': {
+          'from': 'products',
+          'let': {
+            'productId': '$product'
+          },
+          'pipeline': [
+            {
+              '$match': {
+                '$expr': {
+                  '$eq': [
+                    '$_id', {
+                      '$toObjectId': '$$productId'
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          'as': 'product'
+        }
+      }, {
+        '$unwind': {
+          'path': '$product',
+          'preserveNullAndEmptyArrays': true
+        }
+      }, {
+        '$project': {
+          '_id': 1,
+          'product': {
+            '_id': 1,
+            'name': 1,
+            'totalAmount': 1,
+            'progress': 1
+          },
+          'amount': 1,
+          'name': 1,
+          'comment': 1,
+          'paidAt': 1,
+          'email': 1,
+          'paymentPayload': 1,
+          'preferenceId': 1
+        }
+      }
+    ]);
+
+    const payments = await aggregationCursor.toArray();
+
+    return payments.map((payment) => Payment.constructFromDoc(payment));
   }
 
   static async createPayment(payment: OptionalId<IPayment>): Promise<Payment | null> {

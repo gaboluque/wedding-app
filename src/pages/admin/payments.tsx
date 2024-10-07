@@ -1,10 +1,10 @@
-import { IPayment } from "@/models/Payment";
+import { IPaymentWithProduct } from "@/models/Payment";
 import { useEffect, useState } from "react";
 import { formatCurrency } from "@/utils/currencyUtils";
 
 
 export default function Payments() {
-  const [payments, setPayments] = useState<IPayment[]>([]);
+  const [payments, setPayments] = useState<IPaymentWithProduct[]>([]);
 
   useEffect(() => {
     fetch("/api/payments")
@@ -20,6 +20,7 @@ export default function Payments() {
         <tr>
           <th>Nombre</th>
           <th>Valor</th>
+          <th>Producto</th>
           <th>Pago recibido</th>
         </tr>
         </thead>
@@ -28,6 +29,7 @@ export default function Payments() {
           <tr key={payment.id}>
             <td className="w-72">{payment.name || ""}</td>
             <td className="text-center w-44">{formatCurrency(payment.amount)}</td>
+            <td className="text-center w-72">{payment.product.name}</td>
             <td className="text-center">{!!payment.paidAt ? `✅` : `❌`}</td>
           </tr>
         ))}
