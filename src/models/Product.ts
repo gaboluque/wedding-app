@@ -70,3 +70,10 @@ class Product implements IProduct {
 }
 
 export default Product;
+
+
+// Count how many have createdAt null
+// db.products.count({ createdAt: {
+
+// Update all that don't have createdAt
+// db.products.updateMany({ createdAt: null }, { $set: { createdAt: new Date(2024, 05, 01) } })

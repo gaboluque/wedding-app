@@ -48,7 +48,7 @@ export const ProductsList = () => {
           />
           <div className="p-4">
             <h3 className="text-sm h-[50px] font-bold mb-2">
-              {product.name.length > 40 ? product.name.slice(0, 40) + '...' : product.name}
+              {product.name.length > 30 ? product.name.slice(0, 30) + '...' : product.name}
             </h3>
             <p className="text-gray-500">{formatCurrency(product.totalAmount)}</p>
             <div className="progress-container flex flex-row gap-2">
