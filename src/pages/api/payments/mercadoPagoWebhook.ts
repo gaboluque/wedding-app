@@ -38,7 +38,7 @@ export default async function handler(
   const update = await Payment.updatePayment(payment.id, {
     paidAt: new Date(mercadoPagoPayment.date_approved),
     paymentPayload: mercadoPagoPayment,
-  });
+  }, product.id);
 
   if (!update) return res.status(500).json({ message: 'Failed to update payment' });
 

@@ -120,8 +120,6 @@ class Payment implements IPayment {
 
     const createdPayment = await db.collection<IPayment>("payments").findOne({ _id: res.insertedId });
 
-    await Product.updateProgress(payment.product, payment.amount);
-
     return Payment.constructFromDoc(createdPayment);
   }
 
@@ -132,7 +130,7 @@ class Payment implements IPayment {
     return payment ? Payment.constructFromDoc(payment) : null;
   }
 
-  static async updatePayment(id: string, payment: Partial<IPayment>): Promise<Payment | null> {
+  static async updatePayment(id: string, payment: Partial<IPayment>, productId: Product["id"]): Promise<Payment | null> {
     const db = mongoClient.db(dbName);
 
     try {
@@ -143,6 +141,9 @@ class Payment implements IPayment {
       );
 
       if (res) return Payment.constructFromDoc(res);
+
+      await Product.updateProgress(productId, payment?.paymentPayload?.netAmount || 0);
+
       return null;
     } catch (error) {
       console.error(error);
