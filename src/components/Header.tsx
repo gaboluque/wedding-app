@@ -38,6 +38,27 @@ export const Header = ({ pages }: { pages: IPage[] }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const items = useMemo(() => [HOME_PAGE, ...(pages || [])], [pages]);
+  const adminItems = useMemo<IPage[]>(() => {
+    return [
+      HOME_PAGE,
+      {
+        id: 'payments',
+        title: 'Pagos',
+        slug: 'admin/payments',
+        content: [],
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: 'products',
+        title: 'Productos',
+        slug: 'admin/products',
+        content: [],
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ]
+  }, []);
 
   const timeUntilWedding = useMemo(() => {
     const days = Math.floor((WEDDING_DATE.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
@@ -79,7 +100,7 @@ export const Header = ({ pages }: { pages: IPage[] }) => {
       <nav
         className={`p-2 px-5 md:p-2 max-w-screen-sm mx-auto ${isSticky ? 'p-4 pb-0 fixed top-0 left-0 right-0 bg-white shadow-md z-50' : ''}`}>
         <ul className="flex flex-wrap justify-around text-sm font-semibold">
-          {items.map(renderItem)}
+          {!router.pathname.includes("admin") ? items.map(renderItem) : adminItems.map(renderItem)}
         </ul>
       </nav>
     </header>

@@ -67,6 +67,14 @@ class Product implements IProduct {
       { $inc: { progress: newPayment } }
     );
   }
+
+  static async setProgress(productId: string, newPayment: number): Promise<void> {
+    const db = mongoClient.db(dbName);
+    await db.collection<IProduct>("products").updateOne(
+      { _id: new ObjectId(productId) },
+      { $set: { progress: newPayment } }
+    );
+  }
 }
 
 export default Product;
