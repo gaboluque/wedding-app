@@ -120,8 +120,6 @@ class Payment implements IPayment {
 
     const createdPayment = await db.collection<IPayment>("payments").findOne({ _id: res.insertedId });
 
-    await Product.updateProgress(payment.product, payment.amount);
-
     return Payment.constructFromDoc(createdPayment);
   }
 

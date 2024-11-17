@@ -154,6 +154,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
         >
           {loading ? 'Procesando...' : 'Contribuir'}
         </button>
+        <p className="mt-2 text-sm">El pago se verá reflejado entre 12 y 24h una vez sea confirmado</p>
       </div>
     </form>
   );
