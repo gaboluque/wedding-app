@@ -36,7 +36,7 @@ export default function Payments() {
           <tr key={payment.id} className="h-12">
             <td className="w-72">{payment.name || ""}</td>
             <td className="text-center w-44">{formatCurrency(payment.amount)}</td>
-            <td className="text-center w-72">{payment.product.name}</td>
+            <td className="text-center w-72">{payment.product?.name || "Producto eliminado"}</td>
             <td className="text-center">{!!payment.paidAt ? `✅` : `❌`}</td>
             <td className="text-center">
               <button className="btn text-xs" onClick={() => setPaymentMessage(payment)}>
