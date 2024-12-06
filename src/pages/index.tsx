@@ -31,7 +31,7 @@ export default function Home() {
         <h5>
           Hora de llegada: 3:00 PM
           <br/>
-          Inicio de la ceremonia: 3:45 PM
+          Fin del evento: 1:00 AM
         </h5>
       </section>
     </main>
